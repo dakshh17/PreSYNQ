@@ -1,0 +1,220 @@
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Segoe UI, sans-serif;
+}
+
+body{
+background:#f1f5f9;
+}
+
+/* NAVBAR */
+
+.navbar{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:20px 60px;
+background:white;
+box-shadow:0 2px 10px rgba(0,0,0,0.05);
+}
+
+.logo{
+font-size:22px;
+font-weight:700;
+color:#4f46e5;
+}
+
+.nav-buttons button{
+margin-left:10px;
+}
+
+/* HERO */
+
+.hero{
+text-align:center;
+padding:120px 20px;
+}
+
+.hero h1{
+font-size:48px;
+color:#1e293b;
+}
+
+.hero p{
+margin-top:15px;
+font-size:18px;
+color:#64748b;
+}
+
+.btn{
+padding:12px 24px;
+border-radius:8px;
+border:none;
+cursor:pointer;
+font-weight:600;
+}
+
+.btn-primary{
+background:#4f46e5;
+color:white;
+}
+
+.btn-primary:hover{
+background:#4338ca;
+}
+
+.btn-secondary{
+background:#22c55e;
+color:white;
+}
+
+/* FEATURES */
+
+.features{
+max-width:1100px;
+margin:auto;
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:25px;
+padding:60px 20px;
+}
+
+.card{
+background:white;
+padding:25px;
+border-radius:12px;
+box-shadow:0 5px 15px rgba(0,0,0,0.05);
+transition:0.2s;
+}
+
+.card:hover{
+transform:translateY(-4px);
+}
+
+/* AUTH */
+
+.auth-container{
+display:flex;
+justify-content:center;
+align-items:center;
+height:100vh;
+}
+
+.auth-box{
+background:white;
+padding:40px;
+border-radius:12px;
+width:350px;
+box-shadow:0 10px 20px rgba(0,0,0,0.1);
+}
+
+.auth-box h2{
+margin-bottom:20px;
+text-align:center;
+}
+
+.auth-box input,
+.auth-box select{
+width:100%;
+padding:12px;
+margin:10px 0;
+border-radius:6px;
+border:1px solid #cbd5f5;
+}
+
+/* DASHBOARD */
+
+.sidebar{
+position:fixed;
+width:220px;
+height:100vh;
+background:#1e1b4b;
+color:white;
+padding:25px;
+}
+
+.sidebar h2{
+margin-bottom:30px;
+}
+
+.sidebar ul{
+list-style:none;
+}
+
+.sidebar li{
+margin:18px 0;
+cursor:pointer;
+}
+
+.sidebar a{
+color:white;
+text-decoration:none;
+}
+
+.main{
+margin-left:240px;
+padding:40px;
+}
+
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:20px;
+}
+
+.stat{
+background:white;
+padding:25px;
+border-radius:12px;
+box-shadow:0 5px 15px rgba(0,0,0,0.05);
+}
+
+.warning{
+background:#fee2e2;
+}
+
+/* TABLE */
+
+table{
+width:100%;
+border-collapse:collapse;
+background:white;
+margin-top:20px;
+border-radius:10px;
+overflow:hidden;
+}
+
+th, td{
+padding:12px;
+border-bottom:1px solid #e2e8f0;
+text-align:center;
+}
+
+th{
+background:#4f46e5;
+color:white;
+}
+
+/* QR */
+
+.qr-box{
+height:200px;
+display:flex;
+justify-content:center;
+align-items:center;
+border:2px dashed #94a3b8;
+border-radius:10px;
+margin-top:20px;
+}
+
+/* STEPS */
+
+.step{
+background:white;
+padding:15px;
+border-radius:8px;
+margin:10px 0;
+box-shadow:0 2px 6px rgba(0,0,0,0.05);
+}
