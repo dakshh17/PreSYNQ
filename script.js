@@ -55,29 +55,59 @@ document.getElementById("attendanceBody").appendChild(row);
 
 }
 // --- FACULTY LOGIC ---
+let qr;          // QR code object
+let qrInterval;  // interval for countdown
+let timeLeft = 30;
+let currentToken;
+
 function generateSessionQR() {
     const qrArea = document.getElementById('qrArea');
     const container = document.getElementById('qrContainer');
-    qrArea.innerHTML = ""; // Clear old QR
+    const timerText = document.getElementById('timer');
+    const subject = document.getElementById('subjectSelect').value;
+
     container.style.display = "block";
 
-    // In a real app, this text would be a secure token
-    const sessionData = "SESSION_" + Math.random().toString(36).substring(7);
-    
-    // Mocking QR Generation (Using a placeholder image service for simplicity)
-    const qrImg = document.createElement('img');
-    qrImg.src = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${sessionData}`;
-    qrArea.appendChild(qrImg);
+    // Function to generate a new QR
+    function generateQR() {
+        qrArea.innerHTML = ""; // Clear old QR
 
-    let timeLeft = 30;
-    const timerText = document.getElementById('timer');
-    const interval = setInterval(() => {
+        // Create unique token (subject + timestamp + random)
+        currentToken = subject + "_" + Date.now() + "_" + Math.random().toString(36).substring(7);
+
+        // Optional: send token to backend if you want old QR to expire immediately
+        /*
+        fetch("/updateToken", {
+            method: "POST",
+            headers: {"Content-Type":"application/json"},
+            body: JSON.stringify({ token: currentToken })
+        });
+        */
+
+        // Generate QR code in the middle of the page
+        qr = new QRCode(qrArea, {
+            text: currentToken,
+            width: 220,
+            height: 220
+        });
+
+        // Reset countdown
+        timeLeft = 30;
+    }
+
+    // Clear previous interval if any
+    if(qrInterval) clearInterval(qrInterval);
+
+    // Generate first QR immediately
+    generateQR();
+
+    // Start countdown timer and auto-refresh every 30 seconds
+    qrInterval = setInterval(() => {
         timeLeft--;
-        timerText.innerText = `Code expires in: ${timeLeft}s`;
+        timerText.innerText = `Next QR in: ${timeLeft}s`;
+
         if(timeLeft <= 0) {
-            clearInterval(interval);
-            container.style.display = "none";
-            alert("QR Code expired. Generate a new one.");
+            generateQR();
         }
     }, 1000);
 }
