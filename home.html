@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Attendance - Universal Access</title>
+    <script src="https://unpkg.com/html5-qrcode"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
+<link rel="stylesheet" href="style.css">
+<script src="script.js"></script>
+</head>
+<body>
+
+<div id="loginPage" class="page active">
+    <div class="auth-container">
+        <h2>Smart Attendance</h2>
+        <p>Login to your account</p>
+        <input type="email" id="email" placeholder="Email (e.g. user@test.com)">
+        <input type="password" id="pass" placeholder="Password (min 6 chars)">
+        <select id="role">
+            <option value="student">I am a Student</option>
+            <option value="faculty">I am a Faculty Member</option>
+        </select>
+        <button class="btn" onclick="handleLogin()">Sign In</button>
+    </div>
+</div>
+
+<div id="studentDash" class="page">
+    <div class="navbar">
+        <span>Student Portal</span>
+        <button class="btn btn-logout" onclick="location.reload()">Logout</button>
+    </div>
+    <div class="content">
+        <h1>Welcome, Student</h1>
+        <div class="grid">
+            <div class="card"><h3>92%</h3><p>Attendance</p></div>
+            <button class="btn" onclick="startVerification()">📸 Mark Attendance Now</button>
+        </div>
+    </div>
+</div>
+
+<div id="facultyDash" class="page">
+    <div class="navbar">
+        <span>Faculty Portal</span>
+        <button class="btn btn-logout" onclick="location.reload()">Logout</button>
+    </div>
+    <div class="card">
+<h3>Live Attendance</h3>
+
+<table id="attendanceTable" style="width:100%; margin-top:15px; color:white;">
+<thead>
+<tr>
+<th>Student</th>
+<th>Subject</th>
+<th>Time</th>
+</tr>
+</thead>
+
+<tbody id="attendanceBody">
+
+</tbody>
+</table>
+
+</div>
+    <div class="content">
+        <h1>Faculty Control Panel</h1>
+        <div class="card">
+            <h3>Start a New Session</h3>
+            <p>Select subject to generate today's attendance QR</p>
+            <select id="subjectSelect">
+                <option>Advanced Mathematics</option>
+                <option>Quantum Physics</option>
+                <option>Computer Science</option>
+            </select>
+            <button class="btn" style="background: var(--success);" onclick="generateSessionQR()">Generate QR Code</button>
+            <div id="qrContainer" style="margin-top:20px; display:none;">
+                <div id="qrArea"></div>
+                <p id="timer" style="color:red; font-weight:bold; margin-top:10px;"></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="verifyPage" class="page">
+    <div class="content" style="text-align: center;">
+        <h2 id="stepText">Step 1: Scan Class QR</h2>
+        <div id="scannerArea">
+            <div id="reader"></div>
+        </div>
+        <div id="faceArea" style="display:none;">
+            <video id="video" class="video-feed" autoplay muted></video>
+            <h3 id="challenge" style="color: var(--primary); margin: 20px;">Please Blink...</h3>
+        </div>
+        <button class="btn" style="width:auto; background:#64748b;" onclick="showPage('studentDash')">Cancel</button>
+    </div>
+</div>
+</body>
+</html>
